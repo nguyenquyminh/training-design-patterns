@@ -1,5 +1,8 @@
 package com.example.strategy;
 
+import com.example.strategy.strategies.CreditCardPayment;
+import com.example.strategy.strategies.CryptoPayment;
+import com.example.strategy.strategies.PayPalPayment;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,6 +19,15 @@ public class StrategyApplication {
 
 		processor = new PaymentProcessor("Crypto");
 		processor.processPayment(300);
+
+		/////////////////
+		PaymentProcessorStrategy processorStrategy = new PaymentProcessorStrategy(new PayPalPayment());
+		processorStrategy.processPayment(100);
+		processorStrategy.setPaymentStrategy(new CreditCardPayment());
+		processorStrategy.processPayment(200);
+		processorStrategy.setPaymentStrategy(new CryptoPayment());
+		processorStrategy.processPayment(300);
+
 	}
 
 }
