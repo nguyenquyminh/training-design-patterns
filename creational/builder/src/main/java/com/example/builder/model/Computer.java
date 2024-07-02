@@ -1,12 +1,17 @@
 package com.example.builder.model;
 
+import lombok.Builder;
+import lombok.ToString;
+
+@Builder
 public class Computer {
     private String CPU;
-    private String RAM;
+    private String RAM ;
     private String HDD;
     private String SSD;
     private String graphicsCard;
     private String powerSupply;
+
 
     public Computer(String CPU, String RAM, String HDD, String SSD, String graphicsCard, String powerSupply) {
         this.CPU = CPU;
@@ -15,6 +20,15 @@ public class Computer {
         this.SSD = SSD;
         this.graphicsCard = graphicsCard;
         this.powerSupply = powerSupply;
+    }
+
+    Computer(Builder builder) {
+        this.CPU = builder.CPU;
+        this.RAM = builder.RAM;
+        this.HDD = builder.HDD;
+        this.SSD = builder.SSD;
+        this.graphicsCard = builder.graphicsCard;
+        this.powerSupply = builder.powerSupply;
     }
 
     public String getCPU() {
@@ -69,5 +83,53 @@ public class Computer {
     public Computer setPowerSupply(String powerSupply) {
         this.powerSupply = powerSupply;
         return this;
+    }
+    @Override
+    public String toString() {
+        return "Computer [CPU=" + CPU + ", RAM=" + RAM + ", HDD=" + HDD + ", SSD=" + SSD +
+                ", graphicsCard=" + graphicsCard + ", powerSupply=" + powerSupply + "]";
+    }
+    public static class Builder {
+        private String CPU;
+        private String RAM;
+        private String HDD;
+        private String SSD;
+        private String graphicsCard;
+        private String powerSupply;
+
+        public Builder() {
+        }
+        public Builder CPU(String CPU) {
+            this.CPU = CPU;
+            return this;
+        }
+        public Builder RAM(String RAM) {
+            this.RAM = RAM;
+            return this;
+        }
+
+        public Builder HDD(String HDD) {
+            this.HDD = HDD;
+            return this;
+        }
+
+        public Builder SSD(String SSD) {
+            this.SSD = SSD;
+            return this;
+        }
+
+        public Builder graphicsCard(String graphicsCard) {
+            this.graphicsCard = graphicsCard;
+            return this;
+        }
+
+        public Builder powerSupply(String powerSupply) {
+            this.powerSupply = powerSupply;
+            return this;
+        }
+
+        public Computer build() {
+            return new Computer(this);
+        }
     }
 }
