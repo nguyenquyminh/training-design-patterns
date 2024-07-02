@@ -12,21 +12,23 @@ public class FacadeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(FacadeApplication.class, args);
-
 		ImageLoader loader = new ImageLoader();
 		ImageFilter filter = new ImageFilter();
 		ImageSaver saver = new ImageSaver();
-
 		// Loading the image
 		Image image = loader.load("path/to/input.jpg");
-
 		// Applying filters
 		filter.applyBrightness(image);
 		filter.applyContrast(image);
-
 		// Saving the image
 		saver.save(image, "path/to/output.jpg");
 
+		///////////////////////////////////
+		System.out.println("Processing complete, image saved.");
+		/// After apply Facade
+
+		ImageFacade imageFacade = new ImageFacade();
+		imageFacade.processImage("path/to/input.jpg", "path/to/output.jpg");
 		System.out.println("Processing complete, image saved.");
 	}
 
